@@ -3,15 +3,16 @@
 
 #include <iostream>
 #include <string>
+#include "inventory.h"
 
 using namespace std;
 
-enum Jobs {FIGHTER, MAGE, THIEF, SAGE, MONK};
+enum Job {FIGHTER, MAGE, THIEF, SAGE, MONK};
+enum Monster {GOBLIN, ORC, OGRE, DRAGON};
 
 class Character {
     protected:
         string name;
-        Jobs job;
         int level;
         int exp;
         int hp;
@@ -25,7 +26,6 @@ class Character {
         Character();
         ~Character();
         string getName() {return "Name: " + name;}
-        Jobs getJob();
         int getHP() {return hp;}
         int getAttack() {return attack;}
         int getDefense() {return defense;}
@@ -37,12 +37,20 @@ class Character {
 };
 
 class Player: public Character {
+    protected:
+        Job job;
     public:
         Player();
+        string getJob();
+        void printStats();
 };
 
 class Enemy: public Character {
-
+    protected:
+        Monster monster;
+    public:
+        Enemy(Monster monster_type);
+        string getMonster();
 };
 
 #endif // CHARACTER_H_INCLUDED
